@@ -203,12 +203,12 @@ uint16_t PS4Driver::get_report(uint8_t report_id, hid_report_type_t report_type,
     switch(report_id) {
         // Controller Definition Report
         case PS4AuthReport::PS4_DEFINITION:
-            if (reqlen != sizeof(output_0x03)) {
+            if (reqlen < sizeof(output_0x03)) {
                 return -1;
             }
-            memcpy(buffer, output_0x03, reqlen);
+            memcpy(buffer, output_0x03, sizeof(output_0x03));
             buffer[4] = (uint8_t)controllerType; // Change controller type in definition
-            return reqlen;
+            return sizeof(output_0x03);
         // Use our private RSA key to sign the nonce and return chunks
         case PS4AuthReport::PS4_GET_SIGNATURE_NONCE:
             // We send 56 byte chunks back to the PS4, we've already calculated these
@@ -241,15 +241,15 @@ uint16_t PS4Driver::get_report(uint8_t report_id, hid_report_type_t report_type,
             memcpy(buffer, &data[1], 15); // move data over to buffer
             return 15;
         case PS4AuthReport::PS4_RESET_AUTH: // Reset the Authentication
-            if (reqlen != sizeof(output_0xf3)) {
+            if (reqlen < sizeof(output_0xf3)) {
                 return -1;
             }
-            memcpy(buffer, output_0xf3, reqlen);
+            memcpy(buffer, output_0xf3, sizeof(output_0xf3));
             ps4State = PS4State::no_nonce;
             if ( authDriver != nullptr ) {
                 ((PS4Auth*)authDriver)->resetAuth(); // reset the auth driver if it exists
             }
-            return reqlen;
+            return sizeof(output_0xf3);
         default:
             break;
     };
