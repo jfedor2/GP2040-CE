@@ -16,8 +16,8 @@
 // Gamepad-only GIP profile
 
 static const uint8_t xbone_string_language[]    = { 0x09, 0x04 };
-static const uint8_t xbone_string_manufacturer[] = "Open Stick Community";
-static const uint8_t xbone_string_product[]      = "GP2040-CE (Xbox One)";
+static const uint8_t xbone_string_manufacturer[] = "Microsoft";
+static const uint8_t xbone_string_product[]      = "Xbox Adaptive Joystick";
 static const uint8_t xbone_string_version[]      = "1.0";
 
 static const uint8_t *xbone_string_descriptors[] __attribute__((unused)) =
@@ -146,8 +146,8 @@ static const uint8_t xbone_device_descriptor[] =
 	0x47,	      // bDeviceSubClass (GIP)
 	0xD0,	      // bDeviceProtocol
 	0x40,	      // bMaxPacketSize0 64
-	0x6F, 0x0E, // idVendor 0x045E = Xbox One  0x0E6F = SuperPDP  0x0079 = MagicBootS
-	0xA4, 0x02, // idProduct 0x02A4 = SuperPDP Gamepad  0x02EA = Xbox One S  0x02D1 = Xbox One  0x2DD = Xbox One v2  0x1894 = MagicBootS
+	0x5E, 0x04, // idVendor 0x045E (Xbox Adaptive Joystick)
+	0x1A, 0x0B, // idProduct 0x0B1A (Xbox Adaptive Joystick)
 	0x01, 0x01, // bcdDevice 1.01, separate from GIP firmware version
 	0x01,       // iManufacturer (String Index)
 	0x02,       // iProduct (String Index)
